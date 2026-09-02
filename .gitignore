@@ -30,3 +30,5 @@ ai-service/venv/
 # OS
 .DS_Store
 Thumbs.db
+# MongoDB backup
+mongo-backup/
