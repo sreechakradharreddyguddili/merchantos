@@ -59,12 +59,12 @@ resource "kubernetes_secret" "merchantos" {
   type = "Opaque"
 
   data = {
-    MONGODB_URI        = var.mongodb_uri
-    JWT_SECRET         = var.jwt_secret
-    RAZORPAY_KEY_ID    = var.razorpay_key_id
+    MONGODB_URI         = var.mongodb_uri
+    JWT_SECRET          = var.jwt_secret
+    RAZORPAY_KEY_ID     = var.razorpay_key_id
     RAZORPAY_KEY_SECRET = var.razorpay_key_secret
-    GROQ_API_KEY       = var.groq_api_key
-    LLM_MODEL          = var.llm_model
+    GROQ_API_KEY        = var.groq_api_key
+    LLM_MODEL           = var.llm_model
   }
 }
 
@@ -151,7 +151,7 @@ resource "kubernetes_deployment" "backend" {
       spec {
         container {
           name              = "backend"
-          image             = "merchantos-backend"
+          image             = "merchantos-backend:swagger"
           image_pull_policy = "IfNotPresent"
 
           port {
@@ -345,3 +345,4 @@ output "frontend_url" {
 output "namespace" {
   value = kubernetes_namespace.merchantos.metadata[0].name
 }
+

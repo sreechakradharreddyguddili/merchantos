@@ -11,6 +11,7 @@ const growthAnalysisRoutes = require("./routes/growthAnalysisRoutes");
 const agentActionRoutes = require("./routes/agentActionRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const aiBuyerRoutes = require("./routes/aiBuyerRoutes");
+const setupSwagger = require("./config/swagger");
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(
 );
 
 // ==========================================
-// BODY PARSERS â€” MUST COME BEFORE ROUTES
+// BODY PARSERS — MUST COME BEFORE ROUTES
 // ==========================================
 
 app.use(express.json());
@@ -31,6 +32,12 @@ app.use(
     extended: true,
   })
 );
+
+// ==========================================
+// SWAGGER / OPENAPI
+// ==========================================
+
+setupSwagger(app);
 
 // ==========================================
 // HEALTH

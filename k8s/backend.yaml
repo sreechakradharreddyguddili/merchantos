@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: merchantos-backend
+          image: merchantos-backend:swagger
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
@@ -58,3 +58,4 @@ spec:
   ports:
     - port: 5000
       targetPort: 5000
+
