@@ -11,57 +11,103 @@ The platform connects merchant intelligence and buyer intelligence into a closed
 
 ---
 
-## Core Idea
+# Core Idea
 
 MerchantOS creates a continuous revenue-growth loop:
 
-Merchant Data  
-↓  
-AI Analysis  
-↓  
-Revenue Opportunity  
-↓  
-AI Recommendation  
-↓  
-Risk & Policy Evaluation  
-↓  
-Merchant Approval  
-↓  
-Agent Execution  
-↓  
-Business Outcome  
-↓  
-Analytics  
-↓  
-Next Recommendation
+~~~text
+┌─────────────────────┐
+│    Merchant Data    │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│     AI Analysis     │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Revenue Opportunity │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ AI Recommendation   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Risk & Policy       │
+│ Evaluation          │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Merchant Approval   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Agent Execution     │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Business Outcome    │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│     Analytics       │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Next Recommendation │
+└─────────────────────┘
+~~~
 
 The AI Buyer creates the transaction loop:
 
-Buyer Intent  
-↓  
-AI Buyer  
-↓  
-Product Recommendation  
-↓  
-Cross-Sell  
-↓  
-Order Creation  
-↓  
-Razorpay Payment  
-↓  
-Payment Verification  
-↓  
-Revenue  
-↓  
-Merchant Analytics  
-↓  
-Growth Agent
+~~~text
+┌─────────────────────┐
+│    Buyer Intent     │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│      AI Buyer       │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Product Recommend.  │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│    Cross-Selling    │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│   Order Creation    │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│      Razorpay       │
+│      Payment        │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Payment Verification│
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│      Revenue        │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Merchant Analytics  │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│    Growth Agent     │
+└─────────────────────┘
+~~~
 
 ---
 
-## Features
+# Features
 
-### AI Growth Agent
+## AI Growth Agent
 
 The Growth Agent analyzes merchant business data and identifies revenue opportunities such as:
 
@@ -72,7 +118,39 @@ The Growth Agent analyzes merchant business data and identifies revenue opportun
 - Campaign opportunities
 - AI Buyer growth opportunities
 
-### AI Buyer
+The agent does not blindly execute financial actions.
+
+Every action can pass through:
+
+~~~text
+┌──────────────────────┐
+│   Recommendation     │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│   Risk Evaluation    │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│   Policy Decision    │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Merchant Approval    │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│     Execution        │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│    Audit Trail       │
+└──────────────────────┘
+~~~
+
+---
+
+## AI Buyer
 
 The AI Buyer helps customers discover relevant products based on buyer intent.
 
@@ -86,165 +164,395 @@ Capabilities include:
 - Razorpay payment integration
 - Server-side payment verification
 
-### Agent Safety & Governance
+---
 
-MerchantOS does not blindly execute agentic financial actions.
+## Agent Safety & Governance
 
-Growth actions can contain:
+MerchantOS provides controlled agentic execution with:
 
-- Risk level
-- Approval requirement
-- Policy decision
-- Decision reason
+- Risk assessment
+- Approval requirements
+- Policy decisions
+- Decision reasons
 - Supporting evidence
-- Expected outcome
+- Expected outcomes
 - Estimated impact
 - Source channel
 - Audit events
-- Execution result
+- Execution results
 - Failure recovery information
 
-Agent lifecycle:
+### Successful lifecycle
 
-Recommendation Created → Pending Approval → Approved → Execution Started → Completed
+~~~text
+┌────────────────────────┐
+│ Recommendation Created │
+└────────────┬───────────┘
+             ↓
+┌────────────────────────┐
+│    Pending Approval    │
+└────────────┬───────────┘
+             ↓
+┌────────────────────────┐
+│       Approved         │
+└────────────┬───────────┘
+             ↓
+┌────────────────────────┐
+│   Execution Started    │
+└────────────┬───────────┘
+             ↓
+┌────────────────────────┐
+│       Completed        │
+└────────────────────────┘
+~~~
 
-Failure lifecycle:
+### Failure lifecycle
 
-Execution Started → Failed → Failure Reason → Recovery Strategy → Next Step
+~~~text
+┌────────────────────────┐
+│   Execution Started    │
+└────────────┬───────────┘
+             ↓
+┌────────────────────────┐
+│        Failed          │
+└────────────┬───────────┘
+             ↓
+┌────────────────────────┐
+│     Failure Reason     │
+└────────────┬───────────┘
+             ↓
+┌────────────────────────┐
+│   Recovery Strategy    │
+└────────────┬───────────┘
+             ↓
+┌────────────────────────┐
+│       Next Step        │
+└────────────────────────┘
+~~~
 
 ---
 
-## Razorpay Integration
+# Razorpay Integration
 
-Razorpay is integrated as the payment layer.
+Razorpay is used as the payment layer for MerchantOS.
 
-Payment flow:
-
-AI Buyer  
-↓  
-Product Selection  
-↓  
-Order Creation  
-↓  
-Razorpay Payment  
-↓  
-Server-Side Verification  
-↓  
-Order / Payment Update
+~~~text
+┌─────────────────────┐
+│      AI Buyer       │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Product Selection   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│   Order Creation    │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│      Razorpay       │
+│      Payment        │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Server Verification │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Order / Payment     │
+│      Update         │
+└─────────────────────┘
+~~~
 
 ---
 
-## Merchant Operations
+# Merchant Operations
 
 MerchantOS provides the following modules:
 
 ### Dashboard
+
 Business health, revenue intelligence, latest insights, and pending actions.
 
 ### Growth Agent
+
 Business diagnosis, AI recommendations, governed actions, approvals, execution, and audit history.
 
 ### AI Buyer
+
 Buyer-facing product discovery and AI recommendations.
 
 ### Orders
+
 Customer orders, payment status, order status, and order creation.
 
 ### Products
+
 Product and inventory management.
 
 ### Analytics
+
 Business performance and commerce analytics.
 
 ### Settings
+
 Merchant configuration and agent settings.
 
 ---
 
-## Architecture
+# System Architecture
 
-MerchantOS consists of three application services:
-
-| Service | Technology | Port |
-|---|---|---:|
-| Frontend | React + Vite + Nginx | 80 |
-| Backend | Node.js + Express | 5000 |
-| AI Service | Python + FastAPI | 8000 |
-| Database | MongoDB Atlas | External |
-
-Application flow:
-
-Frontend  
-↓  
-Node.js / Express Backend  
-↓  
-AI Service / FastAPI  
-↓  
-Groq / LLM  
-↓  
-MongoDB Atlas
-
-The backend also manages:
-
-- Authentication
-- Products
-- Orders
-- Analytics
-- Growth Agent actions
-- AI Buyer workflows
-- Razorpay payments
-
----
-
-## Agentic Commerce Flow
-
-Merchant Data  
-↓  
-Growth Agent  
-↓  
-Recommendation  
-↓  
-Evidence Collection  
-↓  
-Risk Evaluation  
-↓  
-Policy Decision  
-↓  
-Merchant Approval  
-↓  
-Agent Execution  
-↓  
-Audit Trail  
-↓  
-Business Outcome  
-↓  
-Analytics  
-↓  
-Next Recommendation
-
-At the same time:
-
-Buyer Intent  
-↓  
-AI Buyer  
-↓  
-Recommendation  
-↓  
-Order  
-↓  
-Razorpay  
-↓  
-Payment Verification  
-↓  
-Revenue Data  
-↓  
-Merchant Analytics
+~~~text
+                           ┌────────────────────────┐
+                           │       MERCHANTOS       │
+                           └────────────┬───────────┘
+                                        │
+                    ┌───────────────────┴───────────────────┐
+                    │                                       │
+                    ▼                                       ▼
+          ┌──────────────────┐                    ┌──────────────────┐
+          │  React Frontend  │                    │  AI Intelligence │
+          │  React + Vite    │                    │     FastAPI      │
+          │     Nginx        │                    └────────┬─────────┘
+          └────────┬─────────┘                             │
+                   │                                       ├──────────────┐
+                   ↓                                       ↓              ↓
+          ┌──────────────────┐                    ┌──────────────┐ ┌──────────────┐
+          │ Node.js Backend  │                    │ Growth Agent │ │   AI Buyer   │
+          │    Express.js    │                    └──────┬───────┘ └──────┬───────┘
+          └────────┬─────────┘                           │                │
+                   │                                    └────────┬───────┘
+        ┌──────────┼──────────┐                                │
+        │          │          │                                ▼
+        ▼          ▼          ▼                         ┌──────────────┐
+   ┌─────────┐ ┌─────────┐ ┌───────────┐               │   Groq / LLM │
+   │Products │ │ Orders  │ │ Analytics │               └──────────────┘
+   └────┬────┘ └────┬────┘ └─────┬─────┘
+        │            │            │
+        └────────────┼────────────┘
+                     │
+                     ▼
+              ┌──────────────┐
+              │ MongoDB Atlas │
+              └──────┬───────┘
+                     │
+                     ▼
+              ┌──────────────┐
+              │   Razorpay   │
+              └──────────────┘
+~~~
 
 ---
 
-## Technology Stack
+# Agentic Commerce Architecture
 
-### Frontend
+Merchant intelligence and buyer intelligence work together.
+
+~~~text
+                    MERCHANT SIDE
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │ Merchant Data │
+                 └───────┬───────┘
+                         ↓
+                 ┌───────────────┐
+                 │ Growth Agent  │
+                 └───────┬───────┘
+                         ↓
+                 ┌───────────────┐
+                 │ Opportunity   │
+                 └───────┬───────┘
+                         ↓
+                 ┌───────────────┐
+                 │ Recommendation│
+                 └───────┬───────┘
+                         ↓
+              ┌──────────┴──────────┐
+              │                     │
+              ▼                     ▼
+     ┌────────────────┐    ┌────────────────┐
+     │ Evidence       │    │ Risk Evaluation│
+     └───────┬────────┘    └───────┬────────┘
+             │                     │
+             └──────────┬──────────┘
+                        ↓
+               ┌─────────────────┐
+               │ Policy Decision │
+               └────────┬────────┘
+                        ↓
+               ┌─────────────────┐
+               │Merchant Approval│
+               └────────┬────────┘
+                        ↓
+               ┌─────────────────┐
+               │ Agent Execution │
+               └────────┬────────┘
+                        ↓
+               ┌─────────────────┐
+               │ Business Outcome│
+               └────────┬────────┘
+                        ↓
+                  ┌────────────┐
+                  │ Analytics  │
+                  └─────┬──────┘
+                        │
+                        └───────────────► Next Recommendation
+
+
+                      BUYER SIDE
+                          │
+                          ▼
+                  ┌──────────────┐
+                  │  Buyer Intent│
+                  └──────┬───────┘
+                         ↓
+                  ┌──────────────┐
+                  │    AI Buyer  │
+                  └──────┬───────┘
+                         ↓
+                  ┌──────────────┐
+                  │ Recommendation│
+                  └──────┬───────┘
+                         ↓
+                  ┌──────────────┐
+                  │  Cross-Sell  │
+                  └──────┬───────┘
+                         ↓
+                  ┌──────────────┐
+                  │ Order Create │
+                  └──────┬───────┘
+                         ↓
+                  ┌──────────────┐
+                  │   Razorpay   │
+                  └──────┬───────┘
+                         ↓
+                  ┌──────────────┐
+                  │   Revenue    │
+                  └──────┬───────┘
+                         ↓
+                  ┌──────────────┐
+                  │   Analytics  │
+                  └──────────────┘
+~~~
+
+---
+
+# End-to-End Data Flow
+
+~~~text
+┌──────────────────────┐
+│ Customer / Merchant  │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│   React Frontend     │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Node.js / Express    │
+│      Backend         │
+└──────────┬───────────┘
+           │
+      ┌────┼───────────────┐
+      │    │               │
+      ▼    ▼               ▼
+┌────────┐ ┌────────┐ ┌────────────┐
+│Products│ │ Orders │ │ Analytics  │
+└────┬───┘ └────┬───┘ └─────┬──────┘
+     │           │           │
+     └───────────┼───────────┘
+                 ↓
+        ┌─────────────────┐
+        │  MongoDB Atlas  │
+        └────────┬────────┘
+                 ↓
+        ┌─────────────────┐
+        │   AI Service    │
+        │     FastAPI     │
+        └────────┬────────┘
+                 │
+           ┌─────┴──────┐
+           ▼            ▼
+   ┌──────────────┐ ┌──────────────┐
+   │ Growth Agent │ │   AI Buyer   │
+   └──────┬───────┘ └──────┬───────┘
+          │                │
+          ▼                ▼
+ ┌────────────────┐ ┌────────────────┐
+ │ Recommendations│ │ Buyer Intent   │
+ └───────┬────────┘ └───────┬────────┘
+         │                  │
+         ▼                  ▼
+ ┌────────────────┐ ┌────────────────┐
+ │ Policy + Risk  │ │   Order        │
+ └───────┬────────┘ └───────┬────────┘
+         │                  │
+         ▼                  ▼
+ ┌────────────────┐ ┌────────────────┐
+ │    Approval    │ │    Razorpay    │
+ └───────┬────────┘ └───────┬────────┘
+         │                  │
+         ▼                  ▼
+ ┌────────────────┐ ┌────────────────┐
+ │    Execution   │ │Payment Verify  │
+ └───────┬────────┘ └───────┬────────┘
+         │                  │
+         └──────────┬───────┘
+                    ↓
+             ┌──────────────┐
+             │ Business Data│
+             └───────┬──────┘
+                     ↓
+               ┌───────────┐
+               │ Analytics │
+               └─────┬─────┘
+                     ↓
+              ┌──────────────┐
+              │ Next AI      │
+              │ Decision     │
+              └──────────────┘
+~~~
+
+---
+
+# Docker Architecture
+
+MerchantOS is containerized into three application services.
+
+~~~text
+┌─────────────────────────────────────────────────────────────┐
+│                       DOCKER COMPOSE                        │
+│                                                             │
+│  ┌────────────────┐       ┌────────────────────────────┐   │
+│  │    Frontend    │       │          Backend           │   │
+│  │                │       │                            │   │
+│  │ React + Vite   │──────▶│ Node.js + Express          │   │
+│  │ Nginx          │       │ Port 5000                  │   │
+│  │ Port 80        │       │                            │   │
+│  └────────────────┘       └──────────────┬─────────────┘   │
+│                                          │                 │
+│                                          ▼                 │
+│                           ┌────────────────────────────┐   │
+│                           │        AI Service           │   │
+│                           │                            │   │
+│                           │ Python + FastAPI            │   │
+│                           │ Port 8000                  │   │
+│                           └──────────────┬─────────────┘   │
+└──────────────────────────────────────────┼─────────────────┘
+                                           │
+                              ┌────────────┴────────────┐
+                              ▼                         ▼
+                       ┌──────────────┐          ┌────────────┐
+                       │ MongoDB Atlas│          │    Groq    │
+                       └──────────────┘          └────────────┘
+~~~
+
+---
+
+# Technology Stack
+
+## Frontend
 
 - React
 - Vite
@@ -252,7 +560,7 @@ Merchant Analytics
 - CSS
 - Nginx
 
-### Backend
+## Backend
 
 - Node.js
 - Express.js
@@ -264,7 +572,7 @@ Merchant Analytics
 - Razorpay SDK
 - Redis client
 
-### AI Service
+## AI Service
 
 - Python
 - FastAPI
@@ -279,23 +587,23 @@ Merchant Analytics
 - NumPy
 - Pandas
 
-### Database
+## Database
 
 - MongoDB
 - MongoDB Atlas
 
-### Payments
+## Payments
 
 - Razorpay
 
-### DevOps
+## DevOps
 
 - Git
 - GitHub
 - Docker
 - Docker Compose
 
-### Future / Extended Infrastructure
+## Extended Infrastructure
 
 - AWS
 - Kubernetes
@@ -306,70 +614,56 @@ Merchant Analytics
 
 ---
 
-## Docker
+# Project Structure
 
-MerchantOS is containerized into three services.
-
-Frontend:
-React + Vite + Nginx
-
-Backend:
-Node.js + Express
-
-AI Service:
-Python + FastAPI
-
-Docker Compose manages the application services together.
-
----
-
-## Project Structure
-
+~~~text
 merchantos/
-
-    ai-service/
-        app/
-            agents/
-            models/
-            services/
-            tools/
-            config.py
-            main.py
-            routes.py
-        Dockerfile
-        requirements.txt
-        .dockerignore
-
-    backend/
-        src/
-            config/
-            controllers/
-            middleware/
-            models/
-            routes/
-            services/
-        Dockerfile
-        .dockerignore
-
-    frontend/
-        src/
-            components/
-            hooks/
-            pages/
-            services/
-            utils/
-        Dockerfile
-        nginx.conf
-        .dockerignore
-
-    docker-compose.yml
-    .dockerignore
-    .gitignore
-    README.md
+│
+├── ai-service/
+│   ├── app/
+│   │   ├── agents/
+│   │   ├── models/
+│   │   ├── services/
+│   │   ├── tools/
+│   │   ├── utils/
+│   │   ├── config.py
+│   │   ├── main.py
+│   │   └── routes.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── .dockerignore
+│
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   └── services/
+│   ├── Dockerfile
+│   └── .dockerignore
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   └── .dockerignore
+│
+├── docker-compose.yml
+├── .dockerignore
+├── .gitignore
+└── README.md
+~~~
 
 ---
 
-## Prerequisites
+# Prerequisites
 
 Install:
 
@@ -381,120 +675,160 @@ Install:
 
 ---
 
-## Environment Variables
+# Environment Variables
 
 Never commit `.env` files or secrets to GitHub.
 
-### Backend
+## Backend
 
-    PORT=5000
-    MONGODB_URI=<your-mongodb-uri>
-    JWT_SECRET=<your-jwt-secret>
-    RAZORPAY_KEY_ID=<your-razorpay-key>
-    RAZORPAY_KEY_SECRET=<your-razorpay-secret>
-    AI_SERVICE_URL=http://localhost:8000
+~~~env
+PORT=5000
+MONGODB_URI=<your-mongodb-uri>
+JWT_SECRET=<your-jwt-secret>
+RAZORPAY_KEY_ID=<your-razorpay-key>
+RAZORPAY_KEY_SECRET=<your-razorpay-secret>
+AI_SERVICE_URL=http://localhost:8000
+~~~
 
-### AI Service
+## AI Service
 
-    MONGODB_URI=<your-mongodb-uri>
-    AI_SERVICE_HOST=0.0.0.0
-    AI_SERVICE_PORT=8000
-    GROQ_API_KEY=<your-groq-api-key>
-    LLM_MODEL=openai/gpt-oss-120b
+~~~env
+MONGODB_URI=<your-mongodb-uri>
+AI_SERVICE_HOST=0.0.0.0
+AI_SERVICE_PORT=8000
+GROQ_API_KEY=<your-groq-api-key>
+LLM_MODEL=openai/gpt-oss-120b
+~~~
 
-### Frontend
+## Frontend
 
-    VITE_API_BASE_URL=http://localhost:5000/api
+~~~env
+VITE_API_BASE_URL=http://localhost:5000/api
+~~~
 
 ---
 
-## Run with Docker
+# Run with Docker
 
 From the project root:
 
-    docker compose up -d --build
+~~~bash
+docker compose up -d --build
+~~~
 
 Check containers:
 
-    docker compose ps
+~~~bash
+docker compose ps
+~~~
 
 View backend logs:
 
-    docker compose logs --tail=50 backend
+~~~bash
+docker compose logs --tail=50 backend
+~~~
 
 View AI service logs:
 
-    docker compose logs --tail=50 ai-service
+~~~bash
+docker compose logs --tail=50 ai-service
+~~~
 
 View frontend logs:
 
-    docker compose logs --tail=50 frontend
+~~~bash
+docker compose logs --tail=50 frontend
+~~~
 
 Stop the application:
 
-    docker compose down
+~~~bash
+docker compose down
+~~~
 
 ---
 
-## Local URLs
+# Local URLs
 
 Frontend:
 
-    http://localhost
+~~~text
+http://localhost
+~~~
 
 Backend:
 
-    http://localhost:5000
+~~~text
+http://localhost:5000
+~~~
 
 Backend health:
 
-    http://localhost:5000/api/health
+~~~text
+http://localhost:5000/api/health
+~~~
 
 AI Service:
 
-    http://localhost:8000
+~~~text
+http://localhost:8000
+~~~
 
 AI Service health:
 
-    http://localhost:8000/api/health
+~~~text
+http://localhost:8000/api/health
+~~~
 
 ---
 
-## API Overview
+# API Overview
 
-### Merchants
+## Merchant APIs
 
-    /api/merchants
+~~~text
+/api/merchants
+~~~
 
-### Products
+## Product APIs
 
-    /api/products
+~~~text
+/api/products
+~~~
 
-### Orders
+## Order APIs
 
-    /api/orders
+~~~text
+/api/orders
+~~~
 
-### Analytics
+## Analytics APIs
 
-    /api/analytics
+~~~text
+/api/analytics
+~~~
 
-### Growth Agent
+## Growth Agent APIs
 
-    /api/agent
-    /api/agent-actions
-    /api/growth-analysis
+~~~text
+/api/agent
+/api/agent-actions
+/api/growth-analysis
+~~~
 
-### AI Buyer
+## AI Buyer APIs
 
-    POST /api/ai-buyer/recommend
-    GET  /api/ai-buyer/catalog
-    POST /api/ai-buyer/order
-    POST /api/ai-buyer/payment
-    POST /api/ai-buyer/verify
+~~~text
+POST /api/ai-buyer/recommend
+GET  /api/ai-buyer/catalog
+POST /api/ai-buyer/order
+POST /api/ai-buyer/payment
+POST /api/ai-buyer/verify
+~~~
 
 ---
 
-## Security
+# Security
 
 MerchantOS uses:
 
@@ -518,7 +852,7 @@ Never commit:
 
 ---
 
-## Database
+# Database
 
 MerchantOS uses MongoDB with the following primary collections:
 
@@ -532,56 +866,29 @@ The application is configured to work with MongoDB Atlas.
 
 ---
 
-## GitHub
-
-Repository:
-
-https://github.com/sreechakradharreddyguddili/merchantos
-
-Clone the repository:
-
-    git clone https://github.com/sreechakradharreddyguddili/merchantos.git
-
-    cd merchantos
-
----
-
-## Running the Project
-
-1. Clone the repository.
-2. Configure the required environment variables.
-3. Make sure Docker Desktop is running.
-4. Start the application:
-
-    docker compose up -d --build
-
-5. Open:
-
-    http://localhost
-
----
-
-## Hackathon Positioning
+# Hackathon Positioning
 
 MerchantOS focuses on AI-driven merchant revenue growth and agentic commerce.
 
 The main differentiator is the closed-loop relationship between:
 
-AI Intelligence  
-↓  
-Recommendation  
-↓  
-Governed Agent Action  
-↓  
-Transaction  
-↓  
-Revenue / Inventory Data  
-↓  
-Analytics  
-↓  
+~~~text
+AI Intelligence
+       ↓
+Recommendation
+       ↓
+Governed Agent Action
+       ↓
+Transaction
+       ↓
+Revenue / Inventory Data
+       ↓
+Analytics
+       ↓
 Next Recommendation
+~~~
 
-Instead of only generating AI suggestions, MerchantOS connects AI intelligence to actual commerce workflows with:
+Instead of only generating AI suggestions, MerchantOS connects AI intelligence to real commerce workflows with:
 
 - Policy controls
 - Merchant approval
@@ -593,27 +900,45 @@ Instead of only generating AI suggestions, MerchantOS connects AI intelligence t
 
 ---
 
-## Agentic Safety Model
+# Agentic Safety Model
 
-AI Recommendation  
-↓  
-Evidence Collection  
-↓  
-Risk Evaluation  
-↓  
-Policy Decision  
-↓  
-Approval Gate  
-↓  
-Execution  
-↓  
-Audit Trail  
-↓  
-Outcome / Recovery
+~~~text
+┌──────────────────────┐
+│  AI Recommendation   │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Evidence Collection  │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│   Risk Evaluation    │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│   Policy Decision    │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│    Approval Gate     │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│      Execution       │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│     Audit Trail      │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Outcome / Recovery   │
+└──────────────────────┘
+~~~
 
 ---
 
-## Project Status
+# Project Status
 
 - Frontend complete
 - Backend complete
@@ -624,7 +949,7 @@ Outcome / Recovery
 - Approval workflow complete
 - Decision evidence complete
 - Audit trail complete
-- Failure / recovery handling complete
+- Failure and recovery handling complete
 - MongoDB Atlas configured
 - Docker configured
 - Docker Compose configured
@@ -632,7 +957,7 @@ Outcome / Recovery
 
 ---
 
-## License
+# License
 
 This project was created as a hackathon and portfolio project.
 '@ | Set-Content -Path "C:\MerchantOS\README.md" -Encoding UTF8
@@ -640,5 +965,5 @@ This project was created as a hackathon and portfolio project.
 Add-Content .\.gitignore "`r`n# MongoDB backup`r`nmongo-backup/"
 
 git add README.md .gitignore
-git commit -m "Improve project documentation"
+git commit -m "Refine README architecture and documentation"
 git push
