@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-service
+  namespace: merchantos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-service
+  template:
+    metadata:
+      labels:
+        app: ai-service
+    spec:
+      containers:
+        - name: ai-service
+          image: merchantos-ai-service
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: AI_SERVICE_HOST
+              value: "0.0.0.0"
+            - name: AI_SERVICE_PORT
+              value: "8000"
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: merchantos-secrets
+                  key: MONGODB_URI
+            - name: GROQ_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: merchantos-secrets
+                  key: GROQ_API_KEY
+            - name: LLM_MODEL
+              valueFrom:
+                secretKeyRef:
+                  name: merchantos-secrets
+                  key: LLM_MODEL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-service
+  namespace: merchantos
+spec:
+  selector:
+    app: ai-service
+  ports:
+    - port: 8000
+      targetPort: 8000
