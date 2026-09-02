@@ -32,3 +32,10 @@ ai-service/venv/
 Thumbs.db
 # MongoDB backup
 mongo-backup/
+
+# Terraform local state and secrets
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.*
+terraform/terraform.tfvars
+terraform/*.tfplan
